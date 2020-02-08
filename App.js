@@ -1,16 +1,11 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
 
 export default function App() {
 
-  // Creates State for the Component.
+  // Creates States for the Component.
   const [name, setName] = useState('Davis');
-
-  // Creates State for person.
-  const [person, setPerson] = useState({
-    name: 'John',
-    age: 33
-  })
+  const [age, setAge] = useState('30');
 
   // Handles button clicks.
   const clickHandler = () => {
@@ -23,30 +18,43 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.body}>
-        <Text>My name is {name}.</Text>
-        <Text>Her name is {person.name} and his age is {person.age}.</Text>
-        <View style={styles.buttonContainer}></View>
-        {// In React Native, a button is a self-closing tag with props to decorate it.
-        }
-        <Button title="update state" onPress={clickHandler} />
-        <Text></Text>
-      </View>
+      <Text>Enter name:</Text>
+      <TextInput
+        multiline
+        style={styles.input} 
+        placeholder='e.g. John Doe'
+        onChangeText={(value) => setName(value)}
+      />
+      <Text>Enter age:</Text>
+      <TextInput 
+        keyboardType='numeric'
+        style={styles.input} 
+        placeholder='e.g. 99'
+        onChangeText={(value) => setAge(value)}
+      />
+      <Text>Name: {name} | Age: {age}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  body: {
+    padding: 20
+  },
+  buttonContainer: {
+    marginTop: 20
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  buttonContainer: {
-    marginTop: 20
-  },
-  body: {
-    padding: 20
+  }, 
+  input: {
+    borderWidth: 1,
+    borderColor: '#777',
+    padding: 8,
+    margin: 10,
+    width: 200
   }
 });
